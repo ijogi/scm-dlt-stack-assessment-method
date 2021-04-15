@@ -9,21 +9,30 @@
 </template>
 
 <script>
-import { useStore } from '@nuxtjs/composition-api'
+import { onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
+
 import { NAME, VALUE, TYPE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
   setup () {
-    const { state } = useStore()
+    const { dispatch, state } = useStore()
+    onMounted(() => dispatch('setProgress', 4))
+
     const { iot, network, permission } = state.requirements
+
+    const title = 'Scalability'
+    const description = `
+      Scalability of a DLT network is largely determined by it's structure and the consensus mechanism used by the core protocol. 
+      The scalability of a DLT network can be increased with the inclusion of scaling technologies.
+    `
 
     const offchainStorage = {
         title: 'Does the use case involve storing or processing large files such as images, videos or big documents?',
         info: 'Current DLT network designs aren’t well suited for processing large files, requiring off-chain data storage.',
-        inclusionCriteria: ['Processing of large files'],
-        exclusionCriteria: [],
+        inclusionCriteria: ['Processing or storing large files on-chain'],
+        exclusionCriteria: ['Use case doesn\'t involve processing or storing large files on-chain'],
         yes: [{ name: NAME.OFF_CHAIN, type: TYPE.TECH }],
         no: [],
     }
@@ -90,8 +99,8 @@ export default {
         step0: {
           title: 'Does the use case require smart contracts to process data in near real-time or in large volumes?',
           info: 'Near real-time processing of data allows to use DLT to autonomously execute business rules based on incoming data.',
-          inclusionCriteria: [],
-          exclusionCriteria: [],
+          inclusionCriteria: ['Large data volumes', 'Near real-time data processing', 'Enterprise system integrations'],
+          exclusionCriteria: ['Moderate data loads', 'Few integrations'],
           continue: 'step1',
           yes: [{ name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY }],
           no: [{ name: NAME.TRANSACTION_SPEED, value: VALUE.AVERAGE, type: TYPE.QUALITY }],
@@ -99,11 +108,6 @@ export default {
         step1,
       }
     }
-
-    const title = 'Scalability'
-    const description = `
-      The scalability of a DLT network can be increased with the inclusion of scaling technologies.
-    `
   
     return {
       title,

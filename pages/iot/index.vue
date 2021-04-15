@@ -9,12 +9,18 @@
 </template>
 
 <script>
+import { onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
+
 import { NAME, VALUE, TYPE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
   setup () {
+    const { dispatch } = useStore()
+
+    onMounted(() => dispatch('setProgress', 3))
+
     const title = 'Internet of Things'
     const description = `
       Internet of Things (IOT) refers to a network of physical devices that are capable of connecting to the internet. 

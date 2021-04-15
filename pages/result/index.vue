@@ -47,6 +47,9 @@
       </div>
     </div>
 
+    <div class="row">
+      <h4 class="px-5 mt-4">Criteria</h4>
+    </div>
     <div class="row row-cols-2">
       <div 
         v-for="(values, key) in criteria" 
@@ -54,9 +57,9 @@
         class="col text-left my-4 px-5"
       >
         <div v-if="values.length">
-          <h4>{{ key }} criteria</h4>
+          <p>{{ key }} criteria</p>
           <p v-for="(value, index) in values" :key="index">
-            {{ value }}
+            <small>{{ value }}</small>
           </p>
         </div>
       </div>
@@ -66,13 +69,16 @@
 </template>
 
 <script>
-import { useStore } from '@nuxtjs/composition-api'
-import { TYPE, VALUE } from '~/constants'
+import { onMounted, useStore } from '@nuxtjs/composition-api'
+
+import { VALUE, TYPE } from '~/constants'
 
 export default {
   setup () {
-    const { state } = useStore()
+    const { dispatch, state } = useStore()
 
+    onMounted(() => dispatch('setProgress', 6))
+    
     let { criteria } = state
     const { requirements } = state
 

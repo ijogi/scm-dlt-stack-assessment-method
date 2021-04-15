@@ -9,14 +9,18 @@
 </template>
 
 <script>
-import { useStore } from '@nuxtjs/composition-api'
+import { onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
+
 import { NAME, VALUE, TYPE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
   setup () {
-    const { state } = useStore()
+    const { dispatch, state } = useStore()
+
+    onMounted(() => dispatch('setProgress', 5))
+
     const { network } = state.requirements
 
     const title = 'Interoperability'
@@ -29,16 +33,16 @@ export default {
       step0: {
         title: 'Does the use case involve conflicting requirements that could be resolved by combining different DLTs? ',
         info: 'Complex use cases can leverage the combination of different DLT networks to combine functionalities that cater to different stakeholders or business processes.',
-        inclusionCriteria: [],
-        exclusionCriteria: [],
+        inclusionCriteria: ['Transparency vs Privacy', 'Decentralization vs Scalability'],
+        exclusionCriteria: ['Use case doesn\'t involve conflicting requirements'],
         yes: [{ name: NAME.INTEROP, value: VALUE.MUST_HAVE, type: TYPE.REQ }],
         no: 'step1',
       },
       step1: {
         title: 'Does the use case have intersection points with other DLT compatible industries such as a finance or insurance?',
         info: 'Interoperability can be used for connecting industry specific networks into greater value chains.',
-        inclusionCriteria: ['Identity based access', 'Data privacy'],
-        exclusionCriteria: [],
+        inclusionCriteria: ['Intersection points with financial, insurance, manufacturing and retail industries'],
+        exclusionCriteria: ['Use case doesn\'t expand to other industries'],
         yes: [{ name: NAME.INTEROP, value: VALUE.SHOULD_HAVE, type: TYPE.REQ }],
         no: network.find((n) => n.name === NAME.PRIVATE_NETWORK)
           ? [{ name: NAME.INTEROP, value: VALUE.SHOULD_HAVE, type: TYPE.REQ }]

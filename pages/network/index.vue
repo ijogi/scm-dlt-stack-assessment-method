@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
 
 import { NAME, VALUE, TYPE } from '~/constants'
@@ -16,6 +17,10 @@ import { NAME, VALUE, TYPE } from '~/constants'
 export default {
   components: { DecisionCategory },
   setup () {
+    const { dispatch } = useStore()
+
+    onMounted(() => dispatch('setProgress', 0))
+
     const title = 'Network structure'
     const description = `
       DLT networks are composed of peer-to-peer (P2P) nodes running specialised software that allows to store and replicate the state of a distributed ledger. 

@@ -9,43 +9,61 @@
 </template>
 
 <script>
+import { computed, ref, useStore } from '@nuxtjs/composition-api'
   export default {
     setup() {
 
-      const items = [
+      const store = useStore()
+      const progress = ref(0)
+
+      store.subscribeAction((action) => {
+        if (action.type === 'setProgress') {
+          progress.value = action.payload
+        }
+      })
+
+      const items = computed(() => [
         {
           text: 'Home',
-          to: '/'
+          to: '/',
+          active: false,
         },
         {
           text: 'Network',
           to: { name: 'network' },
+          active: progress.value < 1,
         },
         {
           text: 'Permission model',
           to: { name: 'permission' },
+          active: progress.value < 2,
         },
         {
           text: 'Oracle integrity',
           to: { name: 'oracle-integrity' },
+          active: progress.value < 3,
         },
         {
           text: 'IOT',
           to: { name: 'iot' },
+          active: progress.value < 4,
         },
         {
           text: 'Scalability',
           to: { name: 'scalability' },
+          active: progress.value < 5,
         },
         {
           text: 'Interoperability',
           to: { name: 'interoperability' },
+          active: progress.value < 6,
         },
         {
           text: 'Results',
           to: { name: 'result' },
+          active: progress.value < 7,
         },
-      ]
+      ])
 
       return {
         items,

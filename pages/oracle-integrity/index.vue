@@ -9,12 +9,18 @@
 </template>
 
 <script>
-import { NAME, TYPE } from '~/constants'
+import { onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
+
+import { NAME, TYPE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
   setup () {
+    const { dispatch } = useStore()
+
+    onMounted(() => dispatch('setProgress', 2))
+    
     const title = 'Oracle integrity'
     const description = `
       Oracles are software and hardware agents that interface with smart contracts in order to provide them with data from external systems.

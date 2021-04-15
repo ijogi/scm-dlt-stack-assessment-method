@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
 
 import { NAME, VALUE, TYPE } from '~/constants'
@@ -16,6 +17,10 @@ import { NAME, VALUE, TYPE } from '~/constants'
 export default {
   components: { DecisionCategory },
   setup () {
+    const { dispatch } = useStore()
+
+    onMounted(() => dispatch('setProgress', 1))
+    
     const title = 'Permission model'
     const description = `
       A permission model determines the access rights on a DLT network. 

@@ -24,7 +24,8 @@ export const state = () => ({
     iot: [],
     scalability: [],
     interoperability: [],
-  }
+  },
+  progress: 0,
 })
 
 export const mutations = {
@@ -33,6 +34,9 @@ export const mutations = {
   },
   setCriteria(state, { category, criteria }) {
     state.criteria[category] =  criteria
+  },
+  setProgress(state, categoryStep) {
+    state.progress = categoryStep
   },
   clearStore(state) {
     state = state()
@@ -45,5 +49,8 @@ export const actions = {
   },
   setCriteria({ commit }, payload) {
     commit('setCriteria', payload)
+  },
+  setProgress({ commit }, categoryStep) {
+    commit('setProgress', categoryStep)
   },
 }
