@@ -25,13 +25,13 @@ export default {
     const description = `
       DLT networks are composed of peer-to-peer (P2P) nodes running specialised software that allows to store and replicate the state of a distributed ledger. 
       Public networks allow anyone to view and instantiate transactions as well as host nodes that form the network. Public networks achieve network security and resilience through decentralisation since compromising large networks can become infeasible due to the resources it would take to do so. 
-      Private networks restrict access to a network based on established entities and are governed by a consortium of stakeholders or a single organisation. Private networks are more centralised, but can achieve higher transaction throughputs. 
+      Private networks restrict access to a network and are governed by a consortium of stakeholders or a single organisation. Private networks are more centralised, but can achieve higher transaction throughputs. 
     `
 
     const steps = {
       step0: {
-        title: 'Does the use case require control over the governance of a DLT network?',
-        info: 'Governance determines who can host nodes, access or make changes to the network and manage network operations.',
+        title: 'Does the use case require control over governance of a DLT network?',
+        info: 'Governance determines who can host nodes, access or make changes to a DLT network and manage network operations.',
         inclusionCriteria: ['Control over network governance', 'Restricted access', 'High throughput', 'Data privacy'],
         exclusionCriteria: ['Control over network governance is not required'],
         yes: [

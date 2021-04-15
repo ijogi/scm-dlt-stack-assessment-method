@@ -4,6 +4,10 @@ span[role="button"]:focus {
   outline: none;
 }
 
+li a {
+  color: #17a2b8;
+}
+
 .container {
   font-family: 'Sintony', sans-serif !important;
   margin: 2rem auto;
@@ -41,6 +45,10 @@ span[role="button"]:focus {
   -moz-animation: fadeIn 1s;
   -o-animation: fadeIn 1s;
   -ms-animation: fadeIn 1s;
+}
+
+#__layout > div > div:nth-child(1) > ol > li:nth-child(9)::before {
+  content: "";
 }
 
 @keyframes fadeIn {

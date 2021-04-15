@@ -11,7 +11,7 @@
     <div class="row">
       <h2 class="px-5 mt-4">Feature requirements</h2>
     </div>
-    <div class="row my-4">
+    <div class="row my-4 fade-in">
       <div v-if="mustHave.length" class="col text-left px-5">
         <h4 class="mb-4">Must have</h4>
         <p v-for="feature of mustHave" :key="feature.name">
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="row my-4">
+    <div class="row my-4 fade-in">
       <div v-if="qualities.length" class="col text-left px-5">
         <h2 class="my-4">Qualities</h2>
         <p v-for="quality of qualities" :key="quality.name">
@@ -50,7 +50,7 @@
     <div class="row">
       <h4 class="px-5 mt-4">Criteria</h4>
     </div>
-    <div class="row row-cols-2">
+    <div class="row row-cols-2 fade-in">
       <div 
         v-for="(values, key) in criteria" 
         :key="key"

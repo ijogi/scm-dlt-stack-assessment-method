@@ -23,9 +23,9 @@ export default {
     
     const title = 'Permission model'
     const description = `
-      A permission model determines the access rights on a DLT network. 
+      A permission model determines access rights on a DLT network. 
       The two main permission models used in DLT are permissioned and permissionless. 
-      The permissionless model employed by public DLTs, allows anyone to view the state of a ledger, 
+      Permissionless model employed by public DLTs, allows anyone to view the state of a ledger, 
       operate a node and access smart contracts. Permissioned DLTs determine access rights based on established identities.
     `
 

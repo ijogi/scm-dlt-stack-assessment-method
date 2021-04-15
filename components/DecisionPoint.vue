@@ -39,7 +39,7 @@
         <p>
           <small>
             * While certain DLT platforms offer features such as data privacy or high transaction peformance natively, 
-            there are technologies that can enhance these properites for use cases that also priorities other requirements.
+            there are technologies that can enhance these properites.
           </small>
         </p>
       </div>

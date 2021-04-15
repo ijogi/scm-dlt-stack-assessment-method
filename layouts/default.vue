@@ -31,37 +31,41 @@ import { computed, ref, useStore } from '@nuxtjs/composition-api'
         {
           text: 'Network',
           to: { name: 'network' },
-          active: progress.value < 1,
+          active: false,
         },
         {
           text: 'Permission model',
           to: { name: 'permission' },
-          active: progress.value < 2,
+          active: progress.value < 1,
         },
         {
           text: 'Oracle integrity',
           to: { name: 'oracle-integrity' },
-          active: progress.value < 3,
+          active: progress.value < 2,
         },
         {
           text: 'IOT',
           to: { name: 'iot' },
-          active: progress.value < 4,
+          active: progress.value < 3,
         },
         {
           text: 'Scalability',
           to: { name: 'scalability' },
-          active: progress.value < 5,
+          active: progress.value < 4,
         },
         {
           text: 'Interoperability',
           to: { name: 'interoperability' },
+          active: progress.value < 5,
+        },
+        {
+          text: 'Result',
+          to: { name: 'result' },
           active: progress.value < 6,
         },
         {
-          text: 'Results',
-          to: { name: 'result' },
-          active: progress.value < 7,
+          text: '',
+          active: false,
         },
       ])
 
