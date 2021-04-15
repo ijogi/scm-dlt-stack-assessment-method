@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { NAME, TYPE } from '~/constants'
 import DecisionCategory from '~/components/DecisionCategory.vue'
 
 export default {
@@ -16,8 +17,8 @@ export default {
   setup () {
     const title = 'Oracle integrity'
     const description = `
-      Oracles are software and hardware agents that interface with smart contracts in order to provide them with external data.
-      To ensure the integrity of data coming from external sources, oracles can make use of cryptographic proofs, 
+      Oracles are software and hardware agents that interface with smart contracts in order to provide them with data from external systems.
+      To ensure data integrity, oracles can make use of cryptographic proofs, 
       aggregated data and reputation systems to attest accuracy, validity and the origin of data
     `
 
@@ -26,26 +27,26 @@ export default {
         title: 'Is there a substantial risk for erroneous or malicious data coming from external systems?',
         info: 'Oracle attestation methods can protect against data faults originating from external systems that can’t be recognized by DLT networks.',
         inclusionCriteria: ['Unreliable input data', 'Untrusted data sources', 'Risk of fraud'],
-        exclusionCriteria: [],
+        exclusionCriteria: ['Trusted data sources'],
         yes: 'step1',
-        no: ['Oracle attestation is not required'],
+        no: [],
       },
       step1: {
         title: 'Can same data be obtained from multiple sources?',
         info: 'By aggregating data from multiple sources, the impact of individual faults can be reduced. Oracles can use cryptographic proofs to verify the integrity of data coming from a single source.',
-        inclusionCriteria: ['Multiple data sources'],
-        exclusionCriteria: [],
+        inclusionCriteria: ['Multiple data sources for same data'],
+        exclusionCriteria: ['Single sources of data'],
         continue: 'step2',
-        yes: ['Data aggregation'],
-        no: ['Cryptographic proofs'],
+        yes: [{ name: NAME.DATA_AGGREGATION, type: TYPE.TECH }],
+        no: [{ name: NAME.CRYPT_PROOF, type: TYPE.TECH }],
       },
       step2: {
         title: 'Can data sources be reliably identified?',
         info: 'Identities can be used to build reputation systems, while data sources that can’t be reliably verified can be attest by oracles using cryptographic proofs.',
-        inclusionCriteria: ['Verifiable sources'],
-        exclusionCriteria: [],
-        yes: ['Reputation system'],
-        no: ['Cryptographic proofs'],
+        inclusionCriteria: ['Identities of external data sources are verifiable'],
+        exclusionCriteria: ['Identities of exteral data can\'t be reliably verified'],
+        yes: [{ name: NAME.REP_SYS, type: TYPE.TECH }],
+        no: [{ name: NAME.CRYPT_PROOF, type: TYPE.TECH }],
       },
     }
   

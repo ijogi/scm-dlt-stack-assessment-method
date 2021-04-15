@@ -1,8 +1,58 @@
 <template>
   <div>
+    <div class="container">
+      <b-breadcrumb :items="items"></b-breadcrumb>
+    </div>
+
     <nuxt />
   </div>
 </template>
+
+<script>
+  export default {
+    setup() {
+
+      const items = [
+        {
+          text: 'Home',
+          to: '/'
+        },
+        {
+          text: 'Network',
+          to: { name: 'network' },
+        },
+        {
+          text: 'Permission model',
+          to: { name: 'permission' },
+        },
+        {
+          text: 'Oracle integrity',
+          to: { name: 'oracle-integrity' },
+        },
+        {
+          text: 'IOT',
+          to: { name: 'iot' },
+        },
+        {
+          text: 'Scalability',
+          to: { name: 'scalability' },
+        },
+        {
+          text: 'Interoperability',
+          to: { name: 'interoperability' },
+        },
+        {
+          text: 'Results',
+          to: { name: 'result' },
+        },
+      ]
+
+      return {
+        items,
+      }
+    },
+  }
+</script>
 
 <style>
 html {

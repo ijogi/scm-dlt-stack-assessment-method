@@ -11,6 +11,7 @@
 <script>
 import { useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
+import { NAME, VALUE, TYPE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
@@ -23,39 +24,48 @@ export default {
         info: 'Current DLT network designs aren’t well suited for processing large files, requiring off-chain data storage.',
         inclusionCriteria: ['Processing of large files'],
         exclusionCriteria: [],
-        yes: ['Off-chain storage'],
+        yes: [{ name: NAME.OFF_CHAIN, type: TYPE.TECH }],
         no: [],
     }
 
-    const isPrivatePermissioned = network.includes('Private network (must-have)') && permission.includes('Permissioned (must-have)')
+    const isPrivatePermissioned = network
+      .filter(Boolean)
+      .find((n) => n.name === NAME.PRIVATE_NETWORK && n.value === VALUE.MUST_HAVE) 
+    && permission
+      .filter(Boolean)
+      .find((p) => p.name === NAME.PERMISSIONED && p.value === VALUE.MUST_HAVE)
+
+    const isIotIntegrated = iot
+      .filter(Boolean)
+      .find((i) => i.name === NAME.TRANSACTION_SPEED && i.value === VALUE.HIGH)
 
     const privatePermissioned = {
       yes: [
         ...offchainStorage.yes,
-        'High transaction speed',
-        'Scaling technologies (could-have)',
+        { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
+        { name: NAME.SCALING_TECH, value: VALUE.COULD_HAVE, type: TYPE.REQ },
       ],
       no: [
-        'High transaction speed',
-        'Scaling technologies (could-have)',
+        { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
+        { name: NAME.SCALING_TECH, value: VALUE.COULD_HAVE, type: TYPE.REQ },
       ]
     }
 
     const publicNetwork = {
       yes: [
         ...offchainStorage.yes,
-        'High transaction speed',
-        'Scaling technologies (must-have)',
+        { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
+        { name: NAME.SCALING_TECH, value: VALUE.MUST_HAVE, type: TYPE.REQ },
       ],
       no: [
-        'High transaction speed',
-        'Scaling technologies (must-have)',
+        { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
+        { name: NAME.SCALING_TECH, value: VALUE.MUST_HAVE, type: TYPE.REQ },
       ]
     }
 
     let steps
 
-    if (iot.includes('High transaction speed')) {
+    if (isIotIntegrated) {
       if (isPrivatePermissioned) {
         steps = {
           step0: {
@@ -83,8 +93,8 @@ export default {
           inclusionCriteria: [],
           exclusionCriteria: [],
           continue: 'step1',
-          yes: ['High transaction speed'],
-          no: ['Average transaction speed'],
+          yes: [{ name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY }],
+          no: [{ name: NAME.TRANSACTION_SPEED, value: VALUE.AVERAGE, type: TYPE.QUALITY }],
         },
         step1,
       }

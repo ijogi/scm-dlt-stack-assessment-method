@@ -1,10 +1,10 @@
 <template>
-  <section class="fade-in-image">
+  <section class="fade-in">
     <div class="row my-4">
       <div class="col">
         <div>
-          <h4>{{ title }}</h4>
-          <i>{{ info }}</i>
+          <h4 class="my-4">{{ title }}</h4>
+          <i class="mb-4">{{ info }}</i>
 
           <hr>
         </div>
@@ -12,27 +12,35 @@
     </div>
     <div class="row mb-4">
       <div class="col">
-        <b-button class="mr-4 btn-info" @click="onDecide(step, 'yes')">Yes</b-button>
+        <b-button class="btn-info text-center" @click="onDecide(step, 'yes')">Yes</b-button>
+        <div class="my-5">
+          <h6 v-if="inclusionCriteria.length">
+            Criteria for consideration*
+          </h6>
+          <p>
+            <em>{{ inclusionCriteria.join(', ')}}</em>
+          </p>
+        </div>
       </div>
       <div class="col">
-        <b-button class="ml-4 btn-info" @click="onDecide(step, 'no')">No</b-button>
+        <b-button class="btn-info" @click="onDecide(step, 'no')">No</b-button>
+        <div class="my-5">
+          <h6 v-if="exclusionCriteria.length">
+            Criteria for consideration*
+          </h6>
+          <p>
+            <em>{{ exclusionCriteria.join(', ')}}</em>
+          </p>
+        </div>
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <h6 v-if="inclusionCriteria.length">
-          Criteria for consideration
-        </h6>
         <p>
-          <em>{{ inclusionCriteria.join(', ')}}</em>
-        </p>
-      </div>
-      <div class="col">
-        <h6 v-if="exclusionCriteria.length">
-          Criteria for consideration
-        </h6>
-        <p>
-          <em>{{ exclusionCriteria.join(', ')}}</em>
+          <small>
+            * While certain DLT platforms offer features such as data privacy or high transaction peformance natively, 
+            there are technologies that can enhance these properites for use cases that also priorities other requirements.
+          </small>
         </p>
       </div>
     </div>
@@ -70,37 +78,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .fade-in-image {
-    animation: fadeIn 1s;
-    -webkit-animation: fadeIn 1s;
-    -moz-animation: fadeIn 1s;
-    -o-animation: fadeIn 1s;
-    -ms-animation: fadeIn 1s;
-  }
-  @keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-  }
-
-  @-moz-keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-  }
-
-  @-webkit-keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-  }
-
-  @-o-keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-  }
-
-  @-ms-keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-  }
-</style>

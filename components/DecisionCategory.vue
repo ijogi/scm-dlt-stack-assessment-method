@@ -1,19 +1,17 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row heading-row">
       <div class="col">
         <h1 class="mb-4">
           {{ title }}
-          <span v-b-toggle.collapse>
-            <b-icon icon="question-circle" shift-v="5" font-scale="0.5" />
+          <span v-b-toggle.collapse @click="isOpen = !isOpen">
+            <b-icon :icon="isOpen ? 'chevron-up' : 'chevron-down'" shift-v="5" font-scale="0.5" />
           </span>
         </h1>
         
-        <b-collapse id="collapse">
-          <p>
-            <small>
-              {{ description }}
-            </small>
+        <b-collapse visible id="collapse">
+          <p class="px-5 py-3">
+            {{ description }}
           </p>
         </b-collapse>
 
@@ -36,7 +34,7 @@
 
 <script>
 
-import { reactive, toRefs, useRouter, useStore } from '@nuxtjs/composition-api'
+import { ref, useRouter, useStore } from '@nuxtjs/composition-api'
 import DecisionPoint from '~/components/DecisionPoint.vue'
 
 export default {
@@ -64,17 +62,27 @@ export default {
     }
   },
   setup (props) {
-    const { dispatch } = useStore()
+    const { dispatch, state } = useStore()
     const router = useRouter()
-    const state = reactive({
-      currentStep: 'step0',
-    })
+    const currentStep = ref('step0')
+    const isOpen = ref(true)
 
     let requirements = []
 
     const onDecide = (step, value) => {
       const result = props.steps[step][value]
+      const criteria = [
+        ...new Set([
+          ...state.criteria[props.currentPage],
+          ...props.steps[step][value === 'yes' ? 'inclusionCriteria' : 'exclusionCriteria']
+        ]),
+      ]
       let nextStep = result
+
+      dispatch('setCriteria', {
+        category: props.currentPage,
+        criteria,
+      })
 
       if (Array.isArray(result)) {
         requirements = [...requirements, ...result]
@@ -84,42 +92,14 @@ export default {
         }
         nextStep = props.steps[step].continue
       }
-      state.currentStep = nextStep
+      currentStep.value = nextStep
     }
   
     return {
       onDecide,
-      ...toRefs(state),
+      currentStep,
+      isOpen,
     }
   }
 }
 </script>
-
-<style>
-
-html {
-  background: url(assets/images/pexels-pixabay-262353.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-body {
-  height: 100vh;
-  width: 100vw;
-  background-color: transparent;
-}
-
-.container {
-  margin: 5rem auto;
-  padding: 5rem;
-  text-align: center;
-  background: rgba( 255, 255, 255, 0.90 );
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-  backdrop-filter: blur( 3.5px );
-  -webkit-backdrop-filter: blur( 3.5px );
-  border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
-}
-</style>

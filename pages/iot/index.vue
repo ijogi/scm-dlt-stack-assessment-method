@@ -10,6 +10,7 @@
 
 <script>
 import DecisionCategory from '~/components/DecisionCategory.vue'
+import { NAME, VALUE, TYPE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
@@ -25,18 +26,20 @@ export default {
       step0: {
         title: 'Can the use case be improved by gathering data from the environment of operations?',
         info: 'IOT can be used to monitor and relay data about different conditions and processes.',
-        inclusionCriteria: ['Process tracking'],
-        exclusionCriteria: [],
+        inclusionCriteria: ['Use case involves tangible assets', 'Conditions of assets affects business processes', 'Automated process tracking'],
+        exclusionCriteria: ['Use case doesn\'t involve tangible assets'],
         continue: 'step1',
-        yes: ['IOT'],
-        no: ['IOT is not required'],
+        yes: [{ name: NAME.IOT, type: TYPE.TECH }],
+        no: [],
       },
       step1: {
         title: 'Does the use case require direct integration between IOT and a DLT network?',
         info: 'Direct integration allows to autonomously execute smart contracts in near real-time.',
-        inclusionCriteria: ['Automation'],
-        exclusionCriteria: [],
-        yes: ['High transaction speed'],
+        inclusionCriteria: ['DLT used to process IOT data', 'Automation'],
+        exclusionCriteria: ['DLT used to only store IOT data'],
+        yes: [
+          { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
+        ],
         no: [],
       },
     }

@@ -11,6 +11,8 @@
 <script>
 import DecisionCategory from '~/components/DecisionCategory.vue'
 
+import { NAME, VALUE, TYPE } from '~/constants'
+
 export default {
   components: { DecisionCategory },
   setup () {
@@ -26,34 +28,49 @@ export default {
       step0: {
         title: 'Does the use case require storing unhashed data on a distributed ledger?',
         info: 'Storing hashes instead of raw data enables to verify the integrity off-chain data, while also limiting utility for other use cases.',
-        inclusionCriteria: [],
-        exclusionCriteria: [],
+        inclusionCriteria: ['DLT used to store records', 'On-chain business logic'],
+        exclusionCriteria: ['Off-chain data verification'],
         yes: 'step1',
-        no: ['Permissionless (could-have)', 'Permissioned (could-have)'],
+        no: [
+          { name: NAME.PERMISSIONLESS, value: VALUE.COULD_HAVE, type: TYPE.REQ },
+          { name: NAME.PERMISSIONED, value: VALUE.COULD_HAVE, type: TYPE.REQ },
+        ],
       },
       step1: {
         title: 'Does the use case require access control based on established identities?',
-        info: 'Storing hashes instead of raw data enables to verify the integrity off-chain data, while also limiting utility for other use cases.',
-        inclusionCriteria: ['Identity based access', 'Data privacy'],
-        exclusionCriteria: [],
-        yes: ['Privacy technologies (could-have)', 'Permissioned (must-have)'],
+        info: 'Identities can be used to grant different levels of access and to comply with regulations such as Know Your Client (KYC) requirements.',
+        inclusionCriteria: ['Identity based access'],
+        exclusionCriteria: ['Transparency', 'Open access'],
+        yes: [
+          { name: NAME.PRIVACY_TECH, value: VALUE.COULD_HAVE, type: TYPE.REQ },
+          { name: NAME.PERMISSIONED, value: VALUE.MUST_HAVE, type: TYPE.REQ },
+        ],
         no: 'step2',
       },
       step2: {
         title: 'Does the use case involve confidential data or compliance requirements for data storage?',
         info: 'Regulations can pose requirements for the way certain data is handled. Data confidentiality can also be required to protect sensitive data from competitors or adversaries.',
-        inclusionCriteria: ['Data privacy'],
+        inclusionCriteria: ['Compliance requirements', 'Handling of confidential data'],
         exclusionCriteria: [],
         yes: 'step3',
-        no: ['Permissioned (could-have)', 'Permissionless (could-have)'],
+        no: [
+          { name: NAME.PERMISSIONLESS, value: VALUE.COULD_HAVE, type: TYPE.REQ },
+          { name: NAME.PERMISSIONED, value: VALUE.COULD_HAVE, type: TYPE.REQ },
+        ],
       },
       step3: {
         title: 'Does the use case require data to be publicly verifiable?',
         info: 'Use cases that require keeping data confidential while still being publicly available can utilize various privacy technologies that enable to verify data while keeping its content undisclosed.',
-        inclusionCriteria: ['Transparency'],
-        exclusionCriteria: [],
-        yes: ['Permissionless (must-have)', 'Privacy technologies (must-have)'],
-        no: ['Privacy technologies (could-have)', 'Permissioned (must-have)'],
+        inclusionCriteria: ['Transparency', 'Open access'],
+        exclusionCriteria: ['Identity based access'],
+        yes: [
+          { name: NAME.PERMISSIONLESS, value: VALUE.MUST_HAVE, type: TYPE.REQ },
+          { name: NAME.PRIVACY_TECH, value: VALUE.MUST_HAVE, type: TYPE.REQ },
+        ],
+        no: [
+          { name: NAME.PRIVACY_TECH, value: VALUE.COULD_HAVE, type: TYPE.REQ },
+          { name: NAME.PERMISSIONED, value: VALUE.MUST_HAVE, type: TYPE.REQ },
+        ],
       }
     }
   

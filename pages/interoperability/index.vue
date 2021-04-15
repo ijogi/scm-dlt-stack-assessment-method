@@ -11,6 +11,7 @@
 <script>
 import { useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
+import { NAME, VALUE, TYPE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
@@ -30,7 +31,7 @@ export default {
         info: 'Complex use cases can leverage the combination of different DLT networks to combine functionalities that cater to different stakeholders or business processes.',
         inclusionCriteria: [],
         exclusionCriteria: [],
-        yes: ['Cross-chaininteroperable (must-have)'],
+        yes: [{ name: NAME.INTEROP, value: VALUE.MUST_HAVE, type: TYPE.REQ }],
         no: 'step1',
       },
       step1: {
@@ -38,9 +39,9 @@ export default {
         info: 'Interoperability can be used for connecting industry specific networks into greater value chains.',
         inclusionCriteria: ['Identity based access', 'Data privacy'],
         exclusionCriteria: [],
-        yes: ['Cross-chain interoperable (should-have)'],
-        no: network.includes('Private network (should-have)') || network.includes('Private network (must-have)')
-          ? ['Cross-chain interoperable (should-have)']
+        yes: [{ name: NAME.INTEROP, value: VALUE.SHOULD_HAVE, type: TYPE.REQ }],
+        no: network.find((n) => n.name === NAME.PRIVATE_NETWORK)
+          ? [{ name: NAME.INTEROP, value: VALUE.SHOULD_HAVE, type: TYPE.REQ }]
           : [],
       },
     }
