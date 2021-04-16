@@ -39,6 +39,15 @@ li a {
     padding-top: 1.5rem;
 }
 
+.heading-row a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.heading-row a:hover {
+  color: #fff;
+}
+
 .fade-in {
   animation: fadeIn 1s;
   -webkit-animation: fadeIn 1s;
