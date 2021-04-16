@@ -34,8 +34,7 @@ export default {
         info: 'IOT can be used to monitor and relay data about different conditions and processes.',
         inclusionCriteria: ['Use case involves tangible assets', 'Conditions of assets affect business processes', 'Automated process tracking'],
         exclusionCriteria: ['Use case doesn\'t involve tangible assets'],
-        continue: 'step1',
-        yes: [{ name: NAME.IOT, type: TYPE.TECH }],
+        yes: 'step1',
         no: [],
       },
       step1: {
@@ -44,9 +43,10 @@ export default {
         inclusionCriteria: ['DLT used to process IOT data', 'Highly automated'],
         exclusionCriteria: ['DLT used only to store IOT data'],
         yes: [
+          { name: NAME.IOT, type: TYPE.TECH },
           { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
         ],
-        no: [],
+        no: [{ name: NAME.IOT, type: TYPE.TECH }],
       },
     }
   
