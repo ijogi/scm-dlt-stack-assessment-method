@@ -15,6 +15,10 @@
     <div class="row px-5 my-4">
       <div class="col">
         <p>
+          A distributed ledger is a decentralized database 
+          that is shared between nodes in a peer-to-peer (P2P) network. Distributed Ledger Technology 
+          (DLT) enables decentralized processing of transactions and data storage, that takes place 
+          simultaneously on multiple nodes in a distributed ledger network. 
           A decentralised application (DApp) is a distributed computer system that is able 
           to execute its functions independent of a centralised control system. 
           DApps make use of distributed ledgers, decentralized computing and cryptography to 

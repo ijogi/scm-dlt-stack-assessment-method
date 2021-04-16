@@ -56,7 +56,7 @@ export default {
         title: 'Does the use case involve confidential data or compliance requirements for data storage?',
         info: 'Regulations can pose requirements for the way certain data is handled. Data confidentiality can also be required to protect sensitive data from competitors or adversaries.',
         inclusionCriteria: ['Compliance requirements', 'Handling of confidential data'],
-        exclusionCriteria: [],
+        exclusionCriteria: ['Confidential data is not stored on the ledger'],
         yes: 'step3',
         no: [
           { name: NAME.PERMISSIONLESS, value: VALUE.COULD_HAVE, type: TYPE.REQ },
