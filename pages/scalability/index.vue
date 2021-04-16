@@ -60,7 +60,7 @@ export default {
       ]
     }
 
-    const publicNetwork = {
+    const highPerformancePublicNetwork = {
       yes: [
         ...offchainStorage.yes,
         { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
@@ -86,15 +86,11 @@ export default {
         steps = {
           step0: {
             ...offchainStorage, 
-            ...publicNetwork,
+            ...highPerformancePublicNetwork,
           }
         }
       }
     } else {
-      const step1 = privatePermissioned
-        ? { ...offchainStorage, ...privatePermissioned }
-        : { ...offchainStorage, ...publicNetwork }
-
       steps = {
         step0: {
           title: 'Does the use case require smart contracts to process data in near real-time or in large volumes?',
@@ -105,7 +101,12 @@ export default {
           yes: [{ name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY }],
           no: [{ name: NAME.TRANSACTION_SPEED, value: VALUE.AVERAGE, type: TYPE.QUALITY }],
         },
-        step1,
+        step1: {
+          ...offchainStorage,
+          yes: isPrivatePermissioned 
+            ? [...offchainStorage.yes, ...privatePermissioned.yes] 
+            : [...offchainStorage.yes, ...highPerformancePublicNetwork.yes],
+        },
       }
     }
   
