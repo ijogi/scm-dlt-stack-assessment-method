@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row heading-row">
+    <div class="row px-sm-0 heading-row">
       <div class="col">
         <h1 class="mb-4">
           {{ title }}
@@ -10,7 +10,7 @@
         </h1>
         
         <b-collapse visible id="collapse">
-          <p class="px-5 py-3">
+          <p class="px-md-5 py-3">
             {{ description }}
           </p>
         </b-collapse>

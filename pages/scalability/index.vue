@@ -98,9 +98,9 @@ export default {
       steps = {
         step0: {
           title: 'Does the use case require smart contracts to process data in near real-time or in large volumes?',
-          info: 'Near real-time processing of data allows to use DLT to autonomously execute business rules based on incoming data.',
+          info: 'Near real-time processing of data allows to use DLT to autonomously execute business rules based on incoming data. Large volumes of data are common for DApps that process frequent data from multiple external sources.',
           inclusionCriteria: ['Large data volumes', 'Near real-time data processing', 'Enterprise system integrations'],
-          exclusionCriteria: ['Moderate data loads', 'Few integrations'],
+          exclusionCriteria: ['Moderate data loads', 'Few integrations with external systems'],
           continue: 'step1',
           yes: [{ name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY }],
           no: [{ name: NAME.TRANSACTION_SPEED, value: VALUE.AVERAGE, type: TYPE.QUALITY }],

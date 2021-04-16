@@ -38,8 +38,9 @@
       <div class="col">
         <p>
           <small>
-            * While certain DLT platforms offer features such as data privacy or high transaction peformance natively, 
-            there are technologies that can enhance these properites.
+            * Criteria are an approximation of the possible requirements that can influence a choice. 
+            Some criteria such as scalability and data privacy can be achieved either by core features 
+            of a DLT platform or by extending a platform's capabilities with additional technologies.
           </small>
         </p>
       </div>
