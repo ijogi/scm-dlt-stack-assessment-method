@@ -34,7 +34,7 @@
 
 <script>
 
-import { ref, useRouter, useStore } from '@nuxtjs/composition-api'
+import { onMounted, ref, useRouter, useStore } from '@nuxtjs/composition-api'
 import DecisionPoint from '~/components/DecisionPoint.vue'
 
 export default {
@@ -68,6 +68,11 @@ export default {
     const isOpen = ref(true)
 
     let requirements = []
+
+    onMounted(() => dispatch('setCriteria', {
+        category: props.currentPage,
+        criteria: [],
+      }))
 
     const onDecide = (step, value) => {
       const result = props.steps[step][value]
