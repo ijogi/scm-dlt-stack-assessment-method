@@ -31,8 +31,8 @@ export default {
     const offchainStorage = {
         title: 'Does the use case involve storing or processing large files such as images, videos or big documents?',
         info: 'Current DLT network designs aren’t well suited for processing large files, requiring off-chain data storage.',
-        inclusionCriteria: ['Processing or storing large files on-chain'],
-        exclusionCriteria: ['Use case doesn\'t involve processing or storing large files on-chain'],
+        inclusionCriteria: ['Processing or storing large files'],
+        exclusionCriteria: ['Use case doesn\'t involve processing or storing large files'],
         yes: [{ name: NAME.OFF_CHAIN, type: TYPE.TECH }],
         no: [],
     }

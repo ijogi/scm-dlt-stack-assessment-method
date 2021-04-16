@@ -50,7 +50,7 @@ export default {
         title: 'Can data sources be reliably identified?',
         info: 'Identities can be used to build reputation systems, while data sources that can’t be reliably verified can be attest by oracles using cryptographic proofs.',
         inclusionCriteria: ['Identities of external data sources are verifiable'],
-        exclusionCriteria: ['Identities of exteral data can\'t be reliably verified'],
+        exclusionCriteria: ['Identities of external data sources can\'t be reliably verified'],
         yes: [{ name: NAME.REP_SYS, type: TYPE.TECH }],
         no: [{ name: NAME.CRYPT_PROOF, type: TYPE.TECH }],
       },

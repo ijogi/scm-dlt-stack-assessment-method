@@ -32,7 +32,7 @@ export default {
       step0: {
         title: 'Can the use case be improved by gathering data from the environment of operations?',
         info: 'IOT can be used to monitor and relay data about different conditions and processes.',
-        inclusionCriteria: ['Use case involves tangible assets', 'Conditions of assets affects business processes', 'Automated process tracking'],
+        inclusionCriteria: ['Use case involves tangible assets', 'Conditions of assets affect business processes', 'Automated process tracking'],
         exclusionCriteria: ['Use case doesn\'t involve tangible assets'],
         continue: 'step1',
         yes: [{ name: NAME.IOT, type: TYPE.TECH }],
@@ -41,8 +41,8 @@ export default {
       step1: {
         title: 'Does the use case require direct integration between IOT and a DLT network?',
         info: 'Direct integration allows to autonomously execute smart contracts in near real-time.',
-        inclusionCriteria: ['DLT used to process IOT data', 'Automation'],
-        exclusionCriteria: ['DLT used to only store IOT data'],
+        inclusionCriteria: ['DLT used to process IOT data', 'Highly automated'],
+        exclusionCriteria: ['DLT used only to store IOT data'],
         yes: [
           { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
         ],

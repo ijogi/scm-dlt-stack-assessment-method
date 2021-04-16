@@ -33,7 +33,7 @@ export default {
       step0: {
         title: 'Does the use case require storing unhashed data on a distributed ledger?',
         info: 'Storing hashes instead of raw data enables to verify the integrity off-chain data, while also limiting utility for other use cases.',
-        inclusionCriteria: ['DLT used to store records', 'On-chain business logic'],
+        inclusionCriteria: ['Ledger used as a database', 'On-chain business logic'],
         exclusionCriteria: ['Off-chain data verification'],
         yes: 'step1',
         no: [
@@ -44,7 +44,7 @@ export default {
       step1: {
         title: 'Does the use case require access control based on established identities?',
         info: 'Identities can be used to grant different levels of access and to comply with regulations such as Know Your Client (KYC) requirements.',
-        inclusionCriteria: ['Identity based access'],
+        inclusionCriteria: ['Identity based access', 'Data privacy'],
         exclusionCriteria: ['Transparency', 'Open access'],
         yes: [
           { name: NAME.PRIVACY_TECH, value: VALUE.COULD_HAVE, type: TYPE.REQ },
@@ -55,7 +55,7 @@ export default {
       step2: {
         title: 'Does the use case involve confidential data or compliance requirements for data storage?',
         info: 'Regulations can pose requirements for the way certain data is handled. Data confidentiality can also be required to protect sensitive data from competitors or adversaries.',
-        inclusionCriteria: ['Compliance requirements', 'Handling of confidential data'],
+        inclusionCriteria: ['Compliance requirements', 'Confidential data', 'Data privacy'],
         exclusionCriteria: ['Confidential data is not stored on the ledger'],
         yes: 'step3',
         no: [
