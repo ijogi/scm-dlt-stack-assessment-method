@@ -65,7 +65,7 @@ export default {
       },
       step3: {
         title: 'Does the use case require data to be verifiable by anyone on the network?',
-        info: 'Use cases that require keeping data contents confidential while making verification available to all network parciticpants, can utilize various privacy technologies to do so.',
+        info: 'Use cases that require keeping data contents confidential while making verification available to all network participants, can utilize various privacy technologies to do so.',
         inclusionCriteria: ['Transparency', 'Open access'],
         exclusionCriteria: ['Identity based access'],
         yes: [
