@@ -1,9 +1,5 @@
 
 module.exports = {
-  mode: 'universal',
-  /*
-  ** Headers of the page
-  */
   head: {
     title: 'SCM DApp Assessment',
     meta: [
