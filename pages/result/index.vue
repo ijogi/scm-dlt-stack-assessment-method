@@ -30,7 +30,7 @@
           {{ feature.name }}
         </p>
       </div>
-      <div v-if="coulddHave" class="col text-left px-5">
+      <div v-if="coulddHave.length" class="col text-left px-5">
         <h4 class="mb-4">Could have</h4>
         <p v-for="feature of coulddHave" :key="feature.name">
           {{ feature.name }}
