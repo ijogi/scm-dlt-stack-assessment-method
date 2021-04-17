@@ -37,40 +37,29 @@ export default {
         no: [],
     }
 
-    const isPrivatePermissioned = network
+    const isPrivateNetwork = network
       .filter(Boolean)
-      .find((n) => n.name === NAME.PRIVATE_NETWORK && n.value === VALUE.MUST_HAVE) 
-    && permission
+      .find((n) => n.name === NAME.PRIVATE_NETWORK && n.value === VALUE.MUST_HAVE)
+
+    const isPermissioned = permission
       .filter(Boolean)
       .find((p) => p.name === NAME.PERMISSIONED && p.value === VALUE.MUST_HAVE)
+
+    const isPrivatePermissioned = isPrivateNetwork && isPermissioned
 
     const isIotIntegrated = iot
       .filter(Boolean)
       .find((i) => i.name === NAME.TRANSACTION_SPEED && i.value === VALUE.HIGH)
 
-    const privatePermissioned = {
-      yes: [
-        ...offchainStorage.yes,
-        { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
-        { name: NAME.SCALING_TECH, value: VALUE.COULD_HAVE, type: TYPE.REQ },
-      ],
-      no: [
-        { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
-        { name: NAME.SCALING_TECH, value: VALUE.COULD_HAVE, type: TYPE.REQ },
-      ]
-    }
+    const privatePermissioned = [
+      { name: NAME.SCALING_TECH, value: VALUE.COULD_HAVE, type: TYPE.REQ },
+      { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
+    ]
 
-    const highPerformancePublicNetwork = {
-      yes: [
-        ...offchainStorage.yes,
-        { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
-        { name: NAME.SCALING_TECH, value: VALUE.MUST_HAVE, type: TYPE.REQ },
-      ],
-      no: [
-        { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
-        { name: NAME.SCALING_TECH, value: VALUE.MUST_HAVE, type: TYPE.REQ },
-      ]
-    }
+    const highPerformance = [
+      { name: NAME.SCALING_TECH, value: VALUE.MUST_HAVE, type: TYPE.REQ },
+      { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
+    ]
 
     let steps
 
@@ -79,14 +68,16 @@ export default {
         steps = {
           step0: {
             ...offchainStorage, 
-            ...privatePermissioned,
+            yes: [...privatePermissioned, ...offchainStorage.yes],
+            no: privatePermissioned,
           }
         }
       } else {
         steps = {
           step0: {
-            ...offchainStorage, 
-            ...highPerformancePublicNetwork,
+            ...offchainStorage,
+            yes: [ ...highPerformance, ...offchainStorage.yes],
+            no: highPerformance,
           }
         }
       }
@@ -98,14 +89,13 @@ export default {
           inclusionCriteria: ['Large data volumes', 'Near real-time data processing', 'Enterprise system integrations'],
           exclusionCriteria: ['Moderate data loads', 'Few integrations with external systems'],
           continue: 'step1',
-          yes: [{ name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY }],
+          yes: isPrivatePermissioned 
+            ?  privatePermissioned
+            :  highPerformance,
           no: [{ name: NAME.TRANSACTION_SPEED, value: VALUE.AVERAGE, type: TYPE.QUALITY }],
         },
         step1: {
           ...offchainStorage,
-          yes: isPrivatePermissioned 
-            ? [...offchainStorage.yes, ...privatePermissioned.yes] 
-            : [...offchainStorage.yes, ...highPerformancePublicNetwork.yes],
         },
       }
     }

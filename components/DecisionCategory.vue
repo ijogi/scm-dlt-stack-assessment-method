@@ -69,10 +69,16 @@ export default {
 
     let requirements = []
 
-    onMounted(() => dispatch('setCriteria', {
+    onMounted(() => {
+      dispatch('setCriteria', {
         category: props.currentPage,
         criteria: [],
-      }))
+      })
+      dispatch('setRequirements', {
+        category: props.currentPage,
+        requirements: [],
+      })
+    })
 
     const onDecide = (step, value) => {
       const result = props.steps[step][value]
@@ -91,8 +97,8 @@ export default {
 
       if (Array.isArray(result)) {
         requirements = [...requirements, ...result]
+        dispatch('setRequirements', { category: props.currentPage, requirements })
         if (!props.steps[step].continue) {
-          dispatch('setRequirements', { category: props.currentPage, requirements })
           router.push(props.nextPage)
         }
         nextStep = props.steps[step].continue
