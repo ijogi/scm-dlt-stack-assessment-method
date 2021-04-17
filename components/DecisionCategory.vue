@@ -82,10 +82,12 @@ export default {
 
     const onDecide = (step, value) => {
       const result = props.steps[step][value]
+      const additionalCriteria = props.steps[step].additionalCriteria || []
       const criteria = [
         ...new Set([
           ...state.criteria[props.currentPage],
-          ...props.steps[step][value === 'yes' ? 'inclusionCriteria' : 'exclusionCriteria']
+          ...props.steps[step][value === 'yes' ? 'inclusionCriteria' : 'exclusionCriteria'],
+          ...additionalCriteria,
         ]),
       ]
       let nextStep = result

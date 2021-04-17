@@ -32,7 +32,7 @@ export default {
       step0: {
         title: 'Is there a substantial risk for erroneous or malicious data coming from external systems?',
         info: 'Oracle attestation methods can protect against data faults originating from external systems that can’t be recognized by DLT networks.',
-        inclusionCriteria: ['Unreliable input data', 'Untrusted data sources', 'Risk of fraud'],
+        inclusionCriteria: ['Unreliable input data or untrusted data sources'],
         exclusionCriteria: ['Trusted data sources'],
         yes: 'step1',
         no: [],

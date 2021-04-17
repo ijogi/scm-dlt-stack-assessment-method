@@ -2,14 +2,14 @@
   <decision-category 
     :title="title"
     :description="description"
-    :steps="steps"
+    :steps="decisionSteps"
     current-page="scalability"
     next-page="interoperability"
   />
 </template>
 
 <script>
-import { onMounted, useStore } from '@nuxtjs/composition-api'
+import { computed, onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
 
 import { NAME, VALUE, TYPE } from '~/constants'
@@ -61,13 +61,16 @@ export default {
       { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
     ]
 
+    const highPerformanceCriteria = ['Near real-time data processing or large data volumes']
+
     let steps
 
     if (isIotIntegrated) {
       if (isPrivatePermissioned) {
         steps = {
           step0: {
-            ...offchainStorage, 
+            ...offchainStorage,
+            additionalCriteria: highPerformanceCriteria,
             yes: [...privatePermissioned, ...offchainStorage.yes],
             no: privatePermissioned,
           }
@@ -76,6 +79,7 @@ export default {
         steps = {
           step0: {
             ...offchainStorage,
+            additionalCriteria: highPerformanceCriteria,
             yes: [ ...highPerformance, ...offchainStorage.yes],
             no: highPerformance,
           }
@@ -86,7 +90,7 @@ export default {
         step0: {
           title: 'Does the use case require smart contracts to process data in near real-time or in large volumes?',
           info: 'Near real-time processing of data allows to use DLT to autonomously execute business rules based on incoming data. Large volumes of data are common for DApps that process frequent data from multiple external sources.',
-          inclusionCriteria: ['Large data volumes', 'Near real-time data processing', 'Enterprise system integrations'],
+          inclusionCriteria: highPerformanceCriteria,
           exclusionCriteria: ['Moderate data loads', 'Few integrations with external systems'],
           continue: 'step1',
           yes: isPrivatePermissioned 
@@ -99,11 +103,13 @@ export default {
         },
       }
     }
+
+    const decisionSteps = computed(() => steps)
   
     return {
       title,
       description,
-      steps,
+      decisionSteps,
     }
   }
 }
