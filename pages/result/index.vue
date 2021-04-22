@@ -18,39 +18,27 @@
       <h2 class="px-5 mt-4">Feature requirements</h2>
     </div>
     <div class="row my-4 fade-in">
-      <div class="col text-left px-5">
+      <result-column v-if="mustHave.length" :fields="mustHave">
         <h4 class="mb-4">Must have</h4>
-        <p v-for="feature of mustHave" :key="feature.name">
-          {{ feature.name }}
-        </p>
-      </div>
-      <div v-if="shouldHave.length" class="col text-left px-5">
+      </result-column>
+
+      <result-column v-if="shouldHave.length" :fields="shouldHave">
         <h4 class="mb-4">Should have</h4>
-        <p v-for="feature of shouldHave" :key="feature.name">
-          {{ feature.name }}
-        </p>
-      </div>
-      <div v-if="coulddHave.length" class="col text-left px-5">
+      </result-column>
+
+      <result-column v-if="couldHave.length" :fields="couldHave">
         <h4 class="mb-4">Could have</h4>
-        <p v-for="feature of coulddHave" :key="feature.name">
-          {{ feature.name }}
-        </p>
-      </div>
+      </result-column>
     </div>
 
     <div class="row my-4 fade-in">
-      <div class="col text-left px-5">
+      <result-column v-if="qualities.length" :fields="qualities">
         <h2 class="my-4">Qualities</h2>
-        <p v-for="quality of qualities" :key="quality.name">
-          {{ quality.name }} - {{ quality.value }}
-        </p>
-      </div>
-      <div v-if="technologies.length" class="col text-left px-5">
+      </result-column>
+
+      <result-column v-if="technologies.length" :fields="technologies">
         <h2 class="my-4">Peripheral technologies</h2>
-        <p v-for="technology of technologies" :key="technology.name">
-          {{ technology.name }}
-        </p>
-      </div>
+      </result-column>
     </div>
 
     <div class="row mb-5">
@@ -61,7 +49,7 @@
         </span>
       </h4>
     </div>
-    <b-collapse id="collapse">
+    <b-collapse visible id="collapse">
       <div class="row row-cols-2 fade-in">
         <div 
           v-for="(values, key) in criteria" 
@@ -85,11 +73,13 @@
 import { ref, onMounted, useStore } from '@nuxtjs/composition-api'
 
 import { VALUE, TYPE } from '~/constants'
+import ResultColumn from '~/components/ResultColumn.vue'
 
 export default {
+  components: { ResultColumn },
   setup () {
     const { dispatch, state } = useStore()
-    const isOpen = ref(false)
+    const isOpen = ref(true)
 
     onMounted(() => dispatch('setProgress', 6))
     
@@ -97,14 +87,15 @@ export default {
     const { requirements } = state
 
     const getReqsByType = (type) => Object.values(requirements)
+      .filter(Boolean)
       .reduce((acc, val) => acc.concat(val), [])
       .filter((r) => r.type === type)
 
     const featureRequirements = getReqsByType(TYPE.REQ)
 
     const mustHave = featureRequirements.filter((f) => f.value === VALUE.MUST_HAVE)
-    const shouldHave = featureRequirements.filter((f) => f.value === VALUE.SHOULD_HAVE)
-    const coulddHave = featureRequirements.filter((f) => f.value === VALUE.COULD_HAVE)
+    const shouldHave = featureRequirements.filter((f) => f.value === VALUE.SHOULD_HAVE) || []
+    const couldHave = featureRequirements.filter((f) => f.value === VALUE.COULD_HAVE)
 
     let qualities = []
     getReqsByType(TYPE.QUALITY).map((q) => {
@@ -113,13 +104,13 @@ export default {
         }
     })
 
-    const technologies = getReqsByType(TYPE.TECH)
+    const technologies = getReqsByType(TYPE.TECH) || []
   
     return {
       isOpen,
       mustHave,
       shouldHave,
-      coulddHave,
+      couldHave,
       qualities,
       technologies,
       criteria,

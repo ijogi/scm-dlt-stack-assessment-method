@@ -1,4 +1,7 @@
-import { NAME, VALUE, TYPE } from '~/constants'
+import Features from '~/models/features'
+import Qualities from '~/models/qualities'
+
+import { VALUE } from '~/constants'
 
 export const state = () => ({
   requirements: {
@@ -9,12 +12,12 @@ export const state = () => ({
     scalability: [],
     interoperability: [],
     static: [
-      { name: NAME.SMART_CONTRACTS, value: VALUE.MUST_HAVE, type: TYPE.REQ },
-      { name: NAME.TURING_COMPLETE, value: VALUE.MUST_HAVE, type: TYPE.REQ },
-      { name: NAME.ENTERPRISE, value: VALUE.MUST_HAVE, type: TYPE.REQ },
-      { name: NAME.NETWORK_LAYER, value: VALUE.MUST_HAVE, type: TYPE.REQ },
-      { name: NAME.APPLICATION_LAYER, value: VALUE.MUST_HAVE, type: TYPE.REQ },
-      { name: NAME.TECH_MATURITY, value: VALUE.HIGH, type: TYPE.QUALITY },
+      Features.getSmartContracts(VALUE.MUST_HAVE),
+      Features.getTuringComplete(VALUE.MUST_HAVE),
+      Features.getEnterpriseIntegr(VALUE.MUST_HAVE),
+      Features.getNetworkLayer(VALUE.MUST_HAVE),
+      Features.getAppLayer(VALUE.MUST_HAVE),
+      Qualities.getTechMaturity(VALUE.HIGH),
     ],
   },
   criteria: {

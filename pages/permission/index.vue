@@ -12,7 +12,9 @@
 import { onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
 
-import { NAME, VALUE, TYPE } from '~/constants'
+import Features from '~/models/features'
+
+import { VALUE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
@@ -37,8 +39,8 @@ export default {
         exclusionCriteria: ['Off-chain data verification'],
         yes: 'step1',
         no: [
-          { name: NAME.PERMISSIONLESS, value: VALUE.COULD_HAVE, type: TYPE.REQ },
-          { name: NAME.PERMISSIONED, value: VALUE.COULD_HAVE, type: TYPE.REQ },
+          Features.getPermissioned(VALUE.COULD_HAVE),
+          Features.getPermissionless(VALUE.COULD_HAVE),
         ],
       },
       step1: {
@@ -47,8 +49,8 @@ export default {
         inclusionCriteria: ['Identity based access', 'Data privacy'],
         exclusionCriteria: ['Transparency', 'Open access'],
         yes: [
-          { name: NAME.PRIVACY_TECH, value: VALUE.COULD_HAVE, type: TYPE.REQ },
-          { name: NAME.PERMISSIONED, value: VALUE.MUST_HAVE, type: TYPE.REQ },
+          Features.getPermissioned(VALUE.MUST_HAVE),
+          Features.getPrivacyTech(VALUE.COULD_HAVE),
         ],
         no: 'step2',
       },
@@ -59,8 +61,8 @@ export default {
         exclusionCriteria: ['Confidential data is not stored on the ledger'],
         yes: 'step3',
         no: [
-          { name: NAME.PERMISSIONLESS, value: VALUE.COULD_HAVE, type: TYPE.REQ },
-          { name: NAME.PERMISSIONED, value: VALUE.COULD_HAVE, type: TYPE.REQ },
+          Features.getPermissioned(VALUE.COULD_HAVE),
+          Features.getPermissionless(VALUE.COULD_HAVE),
         ],
       },
       step3: {
@@ -69,12 +71,12 @@ export default {
         inclusionCriteria: ['Transparency', 'Open access'],
         exclusionCriteria: ['Identity based access'],
         yes: [
-          { name: NAME.PERMISSIONLESS, value: VALUE.MUST_HAVE, type: TYPE.REQ },
-          { name: NAME.PRIVACY_TECH, value: VALUE.MUST_HAVE, type: TYPE.REQ },
+          Features.getPermissionless(VALUE.MUST_HAVE),
+          Features.getPrivacyTech(VALUE.MUST_HAVE),
         ],
         no: [
-          { name: NAME.PRIVACY_TECH, value: VALUE.COULD_HAVE, type: TYPE.REQ },
-          { name: NAME.PERMISSIONED, value: VALUE.MUST_HAVE, type: TYPE.REQ },
+          Features.getPermissioned(VALUE.MUST_HAVE),
+          Features.getPrivacyTech(VALUE.COULD_HAVE),
         ],
       }
     }

@@ -12,7 +12,11 @@
 import { computed, onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
 
-import { NAME, VALUE, TYPE } from '~/constants'
+import Features from '~/models/features'
+import Qualities from '~/models/qualities'
+import Technologies from '~/models/technologies'
+
+import { NAME, VALUE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
@@ -33,7 +37,7 @@ export default {
         info: 'Current DLT network designs aren’t well suited for processing large files, requiring off-chain data storage.',
         inclusionCriteria: ['Processing or storing large files'],
         exclusionCriteria: ['Use case doesn\'t involve processing or storing large files'],
-        yes: [{ name: NAME.OFF_CHAIN, type: TYPE.TECH }],
+        yes: [Technologies.getOffChainStorage()],
         no: [],
     }
 
@@ -52,13 +56,13 @@ export default {
       .find((i) => i.name === NAME.TRANSACTION_SPEED && i.value === VALUE.HIGH)
 
     const privatePermissioned = [
-      { name: NAME.SCALING_TECH, value: VALUE.COULD_HAVE, type: TYPE.REQ },
-      { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
+      Features.getScalingTech(VALUE.COULD_HAVE),
+      Qualities.getTransactionSpeed(VALUE.HIGH),
     ]
 
     const highPerformance = [
-      { name: NAME.SCALING_TECH, value: VALUE.MUST_HAVE, type: TYPE.REQ },
-      { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
+      Features.getScalingTech(VALUE.MUST_HAVE),
+      Qualities.getTransactionSpeed(VALUE.HIGH),
     ]
 
     const highPerformanceCriteria = ['Near real-time data processing or large data volumes']
@@ -96,7 +100,7 @@ export default {
           yes: isPrivatePermissioned 
             ?  privatePermissioned
             :  highPerformance,
-          no: [{ name: NAME.TRANSACTION_SPEED, value: VALUE.AVERAGE, type: TYPE.QUALITY }],
+          no: [Qualities.getTransactionSpeed(VALUE.AVERAGE)],
         },
         step1: {
           ...offchainStorage,

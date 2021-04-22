@@ -12,7 +12,10 @@
 import { onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
 
-import { NAME, VALUE, TYPE } from '~/constants'
+import Technologies from '~/models/technologies'
+import Qualities from '~/models/qualities'
+
+import { VALUE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
@@ -43,10 +46,10 @@ export default {
         inclusionCriteria: ['DLT used to process IOT data', 'Highly automated'],
         exclusionCriteria: ['DLT used only to store IOT data'],
         yes: [
-          { name: NAME.IOT, type: TYPE.TECH },
-          { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
+          Technologies.getIoT(),
+          Qualities.getTransactionSpeed(VALUE.HIGH),
         ],
-        no: [{ name: NAME.IOT, type: TYPE.TECH }],
+        no: [Technologies.getIoT()],
       },
     }
   

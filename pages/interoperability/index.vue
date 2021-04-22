@@ -12,7 +12,9 @@
 import { onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
 
-import { NAME, VALUE, TYPE } from '~/constants'
+import Features from '~/models/features'
+
+import { NAME, VALUE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
@@ -35,7 +37,7 @@ export default {
         info: 'Complex use cases can leverage the combination of different DLT networks to combine functionalities that cater to different stakeholders or business processes.',
         inclusionCriteria: ['Needs both transparency and privacy', 'Needs both decentralization and scalability'],
         exclusionCriteria: ['Use case doesn\'t involve conflicting requirements'],
-        yes: [{ name: NAME.INTEROP, value: VALUE.MUST_HAVE, type: TYPE.REQ }],
+        yes: [Features.getInteroperability(VALUE.MUST_HAVE)],
         no: 'step1',
       },
       step1: {
@@ -43,9 +45,9 @@ export default {
         info: 'Interoperability can be used for connecting industry specific networks into greater value chains.',
         inclusionCriteria: ['Intersection points with financial, insurance, manufacturing or retail industries'],
         exclusionCriteria: ['Use case doesn\'t expand to other industries'],
-        yes: [{ name: NAME.INTEROP, value: VALUE.SHOULD_HAVE, type: TYPE.REQ }],
+        yes: [Features.getInteroperability(VALUE.SHOULD_HAVE)],
         no: network.find((n) => n.name === NAME.PRIVATE_NETWORK)
-          ? [{ name: NAME.INTEROP, value: VALUE.SHOULD_HAVE, type: TYPE.REQ }]
+          ? [Features.getInteroperability(VALUE.SHOULD_HAVE)]
           : [],
       },
     }

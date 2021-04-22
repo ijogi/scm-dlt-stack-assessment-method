@@ -12,7 +12,10 @@
 import { onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
 
-import { NAME, VALUE, TYPE } from '~/constants'
+import Features from '~/models/features'
+import Qualities from '~/models/qualities'
+
+import { VALUE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
@@ -35,7 +38,7 @@ export default {
         inclusionCriteria: ['Control over network governance', 'Restricted access', 'High throughput', 'Data privacy'],
         exclusionCriteria: ['Control over network governance is not required'],
         yes: [
-          { name: NAME.PRIVATE_NETWORK, value: VALUE.MUST_HAVE, type: TYPE.REQ },
+          Features.getPrivateNetwork(VALUE.MUST_HAVE),
         ],
         no: 'step1',
       },
@@ -45,7 +48,7 @@ export default {
         inclusionCriteria: ['Data transparency', 'Open governance', 'Decentralization'],
         exclusionCriteria: ['Data transparency is not required', 'Open governance is not required'],
         yes: [
-          { name: NAME.PUBLIC_NETWORK, value: VALUE.MUST_HAVE, type: TYPE.REQ },
+          Features.getPublicNetwork(VALUE.MUST_HAVE),
         ],
         no: 'step2',
       },
@@ -55,13 +58,13 @@ export default {
         inclusionCriteria: ['Modifiable core protocol', 'High throughput'],
         exclusionCriteria: ['Protocol modifications are not required', 'Average throughput'],
         yes: [
-          { name: NAME.PRIVATE_NETWORK, value: VALUE.SHOULD_HAVE, type: TYPE.REQ },
-          { name: NAME.TRANSACTION_SPEED, value: VALUE.HIGH, type: TYPE.QUALITY },
-          { name: NAME.PROTOCOL_LAYER, value: VALUE.MUST_HAVE, type: TYPE.REQ },
+          Features.getPrivateNetwork(VALUE.SHOULD_HAVE),
+          Features.getProtocolLayer(VALUE.MUST_HAVE),
+          Qualities.getTransactionSpeed(VALUE.HIGH),
         ],
         no: [
-          { name: NAME.PRIVATE_NETWORK, value: VALUE.COULD_HAVE, type: TYPE.REQ },
-          { name: NAME.PUBLIC_NETWORK, value: VALUE.COULD_HAVE, type: TYPE.REQ },
+          Features.getPrivateNetwork(VALUE.COULD_HAVE),
+          Features.getPublicNetwork(VALUE.COULD_HAVE),
         ],
       }
     }

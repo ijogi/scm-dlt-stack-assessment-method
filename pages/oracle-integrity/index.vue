@@ -12,7 +12,7 @@
 import { onMounted, useStore } from '@nuxtjs/composition-api'
 import DecisionCategory from '~/components/DecisionCategory.vue'
 
-import { NAME, TYPE } from '~/constants'
+import Technologies from '~/models/technologies'
 
 export default {
   components: { DecisionCategory },
@@ -41,18 +41,18 @@ export default {
         title: 'Can same data be obtained from multiple sources?',
         info: 'By aggregating data from multiple sources, the impact of individual faults can be reduced. Oracles can use cryptographic proofs to verify the integrity of data coming from a single source.',
         inclusionCriteria: ['Multiple data sources for same data'],
-        exclusionCriteria: ['Single sources of data'],
+        exclusionCriteria: ['Single source of data'],
         continue: 'step2',
-        yes: [{ name: NAME.DATA_AGGREGATION, type: TYPE.TECH }],
-        no: [{ name: NAME.CRYPT_PROOF, type: TYPE.TECH }],
+        yes: [Technologies.getDataAggregation()],
+        no: [Technologies.getCryptProof()],
       },
       step2: {
         title: 'Can data sources be reliably identified?',
         info: 'Identities can be used to build reputation systems, while data sources that can’t be reliably verified can be attest by oracles using cryptographic proofs.',
         inclusionCriteria: ['Identities of external data sources are verifiable'],
         exclusionCriteria: ['Identities of external data sources can\'t be reliably verified'],
-        yes: [{ name: NAME.REP_SYS, type: TYPE.TECH }],
-        no: [{ name: NAME.CRYPT_PROOF, type: TYPE.TECH }],
+        yes: [Technologies.getRepSystem()],
+        no: [Technologies.getCryptProof()],
       },
     }
   
