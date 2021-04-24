@@ -29,6 +29,10 @@ export default {
       The two main permission models used in DLT are permissioned and permissionless. 
       Permissionless model employed by public DLTs, allows anyone to view the state of a ledger, 
       operate a node and access smart contracts. Permissioned DLTs determine access rights based on established identities.
+      Data privacy and security can be further enhanced 
+      with the inclusion of different privacy-oriented 
+      technologies that leverage cryptographic techniques to obfuscate, encrypt or 
+      prove the existence of information without revealing it.
     `
 
     const steps = {
