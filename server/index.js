@@ -1,10 +1,11 @@
 const { Nuxt, Builder } = require('nuxt')
 const fastify = require('fastify')({
-  logger: true
+  logger: true,
 })
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
+
 config.dev = !(process.env.NODE_ENV === 'production')
 
 async function start() {
@@ -13,7 +14,7 @@ async function start() {
 
   const {
     host = process.env.HOST || '127.0.0.1',
-    port = process.env.PORT || 3000
+    port = process.env.PORT || 3000,
   } = nuxt.options.server
 
   // Build only in dev mode

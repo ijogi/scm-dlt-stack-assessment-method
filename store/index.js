@@ -1,7 +1,9 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-shadow */
 import Features from '~/models/features'
 import Qualities from '~/models/qualities'
 
-import { VALUE } from '~/constants'
+import { TYPE, VALUE } from '~/constants'
 
 export const state = () => ({
   requirements: {
@@ -31,18 +33,37 @@ export const state = () => ({
   progress: 0,
 })
 
+const getReqsByType = (requirements, type, value) => Object.values(requirements)
+  .filter(Boolean)
+  .reduce((acc, val) => acc.concat(val), [])
+  .filter((r) => r.type === type)
+  .filter((r) => (value ? r.value === value : true))
+
+export const getters = {
+  mustHave: (state) => getReqsByType(state.requirements, TYPE.REQ, VALUE.MUST_HAVE),
+  shouldHave: (state) => getReqsByType(state.requirements, TYPE.REQ, VALUE.SHOULD_HAVE),
+  couldHave: (state) => getReqsByType(state.requirements, TYPE.REQ, VALUE.COULD_HAVE),
+  qualities(state) {
+    const qualities = []
+    getReqsByType(state.requirements, TYPE.QUALITY).forEach((q) => {
+      if (qualities.findIndex((f) => f.name === q.name && f.value === q.value) < 0) {
+        qualities.push(q)
+      }
+    })
+    return qualities
+  },
+  technologies: (state) => getReqsByType(state.requirements, TYPE.TECH),
+}
+
 export const mutations = {
   setRequirements(state, { category, requirements }) {
     state.requirements[category] = requirements
   },
   setCriteria(state, { category, criteria }) {
-    state.criteria[category] =  criteria
+    state.criteria[category] = criteria
   },
   setProgress(state, categoryStep) {
     state.progress = categoryStep
-  },
-  clearStore(state) {
-    state = state()
   },
 }
 

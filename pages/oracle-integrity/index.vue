@@ -1,5 +1,5 @@
 <template>
-  <decision-category 
+  <decision-category
     :title="title"
     :description="description"
     :steps="steps"
@@ -16,11 +16,11 @@ import Technologies from '~/models/technologies'
 
 export default {
   components: { DecisionCategory },
-  setup () {
+  setup() {
     const { dispatch } = useStore()
 
     onMounted(() => dispatch('setProgress', 2))
-    
+
     const title = 'Oracle integrity'
     const description = `
       Oracles are software and hardware agents that interface with smart contracts in order to provide them with data from external systems.
@@ -55,12 +55,12 @@ export default {
         no: [Technologies.getCryptProof()],
       },
     }
-  
+
     return {
       title,
       description,
       steps,
     }
-  }
+  },
 }
 </script>

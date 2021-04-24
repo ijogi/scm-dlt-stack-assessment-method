@@ -11,7 +11,7 @@ export default {
       as well as host nodes that form the network. Public networks achieve network 
       security and resilience through decentralisation since compromising large networks 
       can become infeasible due to the resources it would take to do so.
-    `
+    `,
   }),
   getPrivateNetwork: (value) => ({
     id: 'priv-net',
@@ -21,9 +21,17 @@ export default {
     description: `
       Private networks restrict access to a distributed ledger on the network level and are governed by a consortium of stakeholders or a single organisation. 
       This makes them less decentralised than public networks, but they can achieve higher transaction throughputs.
-    `
+    `,
   }),
-  getProtocolLayer: (value) => ({ id: 'prot-l', name: NAME.PROTOCOL_LAYER, value, type: TYPE.REQ }),
+  getProtocolLayer: (value) => ({
+    id: 'prot-l',
+    name: NAME.PROTOCOL_LAYER,
+    value,
+    type: TYPE.REQ,
+    description: `
+      A DLT protocol provides the underluing software that defines the ledger architecture and consensus mechanism.
+    `,
+  }),
   getPermissionless: (value) => ({
     id: 'perm-less',
     name: NAME.PERMISSIONLESS,
@@ -33,7 +41,7 @@ export default {
       The permissionless model employed by public DLTs, 
       allows anyone to view the state of a ledger, 
       operate a node and access smart contracts.
-    `
+    `,
   }),
   getPermissioned: (value) => ({
     id: 'permd',
@@ -45,7 +53,7 @@ export default {
       The need for permissioned DLTs originates from enterprise use cases where 
       different confidentiality and compliance requirements place restrictions 
       on data access and processing.
-    `
+    `,
   }),
   getPrivacyTech: (value) => ({
     id: 'priv-tech',
@@ -58,7 +66,7 @@ export default {
       encrypt or prove the existence of information without revealing it. 
       Examples of privacy technologies are zero knowledge proofs, state channels, 
       indistinguishable obfuscation and homomorphic encryption.
-    `
+    `,
   }),
   getScalingTech: (value) => ({
     id: 'scal-tech',
@@ -73,7 +81,7 @@ export default {
     Off-chain scaling also known as layer 2 scaling aims to increase transaction throughput by moving 
     some of the transactions away from the main ledger, while maintaining to use it sfor verifying and storing 
     the outcome of off-chain transactions. Examples of off-chain scaling solutions are state channels, side chains, plasma, ZK-rollups and cross-chains.
-    `
+    `,
   }),
   getInteroperability: (value) => ({
     id: 'interop',
@@ -86,7 +94,7 @@ export default {
       different ecosystems and industry specific networks into greater value chains. 
       Without interoperability DLT networks, especially more purpose-built networks, 
       can run into the risk of turning into siloed ecosystems.
-    `
+    `,
   }),
   getSmartContracts: (value) => ({
     id: 'sc',
@@ -103,9 +111,9 @@ export default {
       its transfer are met. When a smart contract is invoked, the computation is performed 
       simultaneously on different nodes in a network. The result of the computation is 
       decided by a consensus mechanism and appended to the distributed ledger.
-    `
+    `,
   }),
-  getTuringComplete: (value) => ( {
+  getTuringComplete: (value) => ({
     id: 'tc',
     name: NAME.TURING_COMPLETE,
     value,
@@ -114,7 +122,7 @@ export default {
       Turing complete smart contract programming languages enable to
       implement a variety of algorithms as opposed to limited scripted languages
       that have a reduced set of operations. 
-    `
+    `,
   }),
   getEnterpriseIntegr: (value) => ({
     id: 'entrp',
@@ -126,7 +134,7 @@ export default {
       DLT platforms usually implement SDKs and software libraries written in 
       general purpose programming languages that enable to interact with 
       the distributed ledger using prevalent programming tools.
-    `
+    `,
   }),
   getNetworkLayer: (value) => ({
     id: 'net-l',
@@ -135,7 +143,7 @@ export default {
     type: TYPE.REQ,
     description: `
       Network layer provides the P2P DLT network.
-    `
+    `,
   }),
   getAppLayer: (value) => ({
     id: 'app-l',
@@ -144,6 +152,6 @@ export default {
     type: TYPE.REQ,
     description: `
       Application layer enables to build applications on top of a DLT network.
-    `
+    `,
   }),
 }

@@ -8,13 +8,12 @@
             <b-icon :icon="isOpen ? 'chevron-up' : 'chevron-down'" shift-v="5" font-scale="0.5" />
           </span>
         </h1>
-        
-        <b-collapse visible id="collapse">
+
+        <b-collapse id="collapse" visible>
           <p class="px-md-5 py-3">
             {{ description }}
           </p>
         </b-collapse>
-
       </div>
     </div>
     <template v-for="(value, key) in steps">
@@ -34,7 +33,9 @@
 
 <script>
 
-import { onMounted, ref, useRouter, useStore } from '@nuxtjs/composition-api'
+import {
+  onMounted, ref, useRouter, useStore,
+} from '@nuxtjs/composition-api'
 import DecisionPoint from '~/components/DecisionPoint.vue'
 
 export default {
@@ -59,9 +60,9 @@ export default {
     nextPage: {
       type: String,
       required: true,
-    }
+    },
   },
-  setup (props) {
+  setup(props) {
     const { dispatch, state } = useStore()
     const router = useRouter()
     const currentStep = ref('step0')
@@ -107,12 +108,12 @@ export default {
       }
       currentStep.value = nextStep
     }
-  
+
     return {
       onDecide,
       currentStep,
       isOpen,
     }
-  }
+  },
 }
 </script>

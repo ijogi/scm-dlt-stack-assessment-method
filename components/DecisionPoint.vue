@@ -3,7 +3,9 @@
     <div class="row my-4">
       <div class="col">
         <div>
-          <h4 class="my-4">{{ title }}</h4>
+          <h4 class="my-4">
+            {{ title }}
+          </h4>
           <i class="mb-4">{{ info }}</i>
 
           <hr>
@@ -12,24 +14,28 @@
     </div>
     <div class="row mb-4">
       <div class="col">
-        <b-button class="btn-info text-center" @click="onDecide(step, 'yes')">Yes</b-button>
+        <b-button class="btn-info text-center" @click="onDecide(step, 'yes')">
+          Yes
+        </b-button>
         <div class="my-5">
           <h6 v-if="inclusionCriteria.length">
             Criteria for consideration*
           </h6>
           <p>
-            <em>{{ inclusionCriteria.join(', ')}}</em>
+            <em>{{ inclusionCriteria.join(', ') }}</em>
           </p>
         </div>
       </div>
       <div class="col">
-        <b-button class="btn-info" @click="onDecide(step, 'no')">No</b-button>
+        <b-button class="btn-info" @click="onDecide(step, 'no')">
+          No
+        </b-button>
         <div class="my-5">
           <h6 v-if="exclusionCriteria.length">
             Criteria for consideration*
           </h6>
           <p>
-            <em>{{ exclusionCriteria.join(', ')}}</em>
+            <em>{{ exclusionCriteria.join(', ') }}</em>
           </p>
         </div>
       </div>
@@ -38,14 +44,15 @@
       <div class="col">
         <p>
           <small>
-            * Criteria are an approximation of the possible requirements that can influence a choice. 
-            Some characteristics such as high transaction throughput and data privacy can be achieved either by core features 
+            * Criteria are an approximation of the possible requirements that can influence a choice.
+            Some characteristics such as high transaction throughput and data privacy can be achieved either by core features
             of a DLT platform or by extending a platform's capabilities with additional technologies.
+            On-chain refers to something taking place on the DLT network while off-chain refers to something taking place outside
+            the DLT network.
           </small>
         </p>
       </div>
     </div>
-
   </section>
 </template>
 
@@ -62,7 +69,7 @@ export default {
     },
     step: {
       type: String,
-      required: true
+      required: true,
     },
     onDecide: {
       type: Function,
@@ -75,7 +82,7 @@ export default {
     exclusionCriteria: {
       type: Array,
       required: true,
-    }
-  }
+    },
+  },
 }
 </script>

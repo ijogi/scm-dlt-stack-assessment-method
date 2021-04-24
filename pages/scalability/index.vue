@@ -1,5 +1,5 @@
 <template>
-  <decision-category 
+  <decision-category
     :title="title"
     :description="description"
     :steps="decisionSteps"
@@ -20,7 +20,7 @@ import { NAME, VALUE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
-  setup () {
+  setup() {
     const { dispatch, state } = useStore()
     onMounted(() => dispatch('setProgress', 4))
 
@@ -33,12 +33,12 @@ export default {
     `
 
     const offchainStorage = {
-        title: 'Does the use case involve storing or processing large files such as images, videos or big documents?',
-        info: 'Current DLT network designs aren’t well suited for processing large files, requiring off-chain data storage.',
-        inclusionCriteria: ['Processing or storing large files'],
-        exclusionCriteria: ['Use case doesn\'t involve processing or storing large files'],
-        yes: [Technologies.getOffChainStorage()],
-        no: [],
+      title: 'Does the use case involve storing or processing large files such as images, videos or big documents?',
+      info: 'Current DLT network designs aren’t well suited for processing large files, requiring off-chain data storage.',
+      inclusionCriteria: ['Processing or storing large files'],
+      exclusionCriteria: ['Use case doesn\'t involve processing or storing large files'],
+      yes: [Technologies.getOffChainStorage()],
+      no: [],
     }
 
     const isPrivateNetwork = network
@@ -77,16 +77,16 @@ export default {
             additionalCriteria: highPerformanceCriteria,
             yes: [...privatePermissioned, ...offchainStorage.yes],
             no: privatePermissioned,
-          }
+          },
         }
       } else {
         steps = {
           step0: {
             ...offchainStorage,
             additionalCriteria: highPerformanceCriteria,
-            yes: [ ...highPerformance, ...offchainStorage.yes],
+            yes: [...highPerformance, ...offchainStorage.yes],
             no: highPerformance,
-          }
+          },
         }
       }
     } else {
@@ -97,9 +97,9 @@ export default {
           inclusionCriteria: highPerformanceCriteria,
           exclusionCriteria: ['Moderate data loads', 'Few integrations with external systems'],
           continue: 'step1',
-          yes: isPrivatePermissioned 
-            ?  privatePermissioned
-            :  highPerformance,
+          yes: isPrivatePermissioned
+            ? privatePermissioned
+            : highPerformance,
           no: [Qualities.getTransactionSpeed(VALUE.AVERAGE)],
         },
         step1: {
@@ -109,12 +109,12 @@ export default {
     }
 
     const decisionSteps = computed(() => steps)
-  
+
     return {
       title,
       description,
       decisionSteps,
     }
-  }
+  },
 }
 </script>

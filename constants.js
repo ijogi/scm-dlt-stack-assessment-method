@@ -31,8 +31,8 @@ export const NAME = {
   INTEROP: 'Cross-chain interoperable',
   SMART_CONTRACTS: 'Smart contracts',
   TURING_COMPLETE: 'Turing complete',
-  ENTERPRISE: 'Enterprise system integration',
+  ENTERPRISE: 'Enterprise system integrable',
   NETWORK_LAYER: 'Network layer',
   APPLICATION_LAYER: 'Application layer',
-  TECH_MATURITY: 'Technology maturity',
+  TECH_MATURITY: 'Technological maturity',
 }

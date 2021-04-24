@@ -1,5 +1,5 @@
 <template>
-  <decision-category 
+  <decision-category
     :title="title"
     :description="description"
     :steps="steps"
@@ -19,7 +19,7 @@ import { VALUE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
-  setup () {
+  setup() {
     const { dispatch } = useStore()
 
     onMounted(() => dispatch('setProgress', 0))
@@ -59,6 +59,7 @@ export default {
         exclusionCriteria: ['Protocol modifications are not required', 'Average throughput'],
         yes: [
           Features.getPrivateNetwork(VALUE.SHOULD_HAVE),
+          Features.getPublicNetwork(VALUE.COULD_HAVE),
           Features.getProtocolLayer(VALUE.MUST_HAVE),
           Qualities.getTransactionSpeed(VALUE.HIGH),
         ],
@@ -66,14 +67,14 @@ export default {
           Features.getPrivateNetwork(VALUE.COULD_HAVE),
           Features.getPublicNetwork(VALUE.COULD_HAVE),
         ],
-      }
+      },
     }
-  
+
     return {
       title,
       description,
       steps,
     }
-  }
+  },
 }
 </script>

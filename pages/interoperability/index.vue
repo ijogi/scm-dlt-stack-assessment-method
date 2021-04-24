@@ -1,5 +1,5 @@
 <template>
-  <decision-category 
+  <decision-category
     :title="title"
     :description="description"
     :steps="steps"
@@ -18,7 +18,7 @@ import { NAME, VALUE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
-  setup () {
+  setup() {
     const { dispatch, state } = useStore()
 
     onMounted(() => dispatch('setProgress', 5))
@@ -51,12 +51,12 @@ export default {
           : [],
       },
     }
-  
+
     return {
       title,
       description,
       steps,
     }
-  }
+  },
 }
 </script>

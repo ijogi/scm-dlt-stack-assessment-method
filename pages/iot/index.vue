@@ -1,5 +1,5 @@
 <template>
-  <decision-category 
+  <decision-category
     :title="title"
     :description="description"
     :steps="steps"
@@ -19,7 +19,7 @@ import { VALUE } from '~/constants'
 
 export default {
   components: { DecisionCategory },
-  setup () {
+  setup() {
     const { dispatch } = useStore()
 
     onMounted(() => dispatch('setProgress', 3))
@@ -52,12 +52,12 @@ export default {
         no: [Technologies.getIoT()],
       },
     }
-  
+
     return {
       title,
       description,
       steps,
     }
-  }
+  },
 }
 </script>
