@@ -3,7 +3,7 @@
     <div class="row heading-row">
       <div class="col">
         <h1 class="mb-4">
-          Assessment method for Supply Chain Management DApps
+          DLT stack identification for SCM DApps
         </h1>
       </div>
     </div>
