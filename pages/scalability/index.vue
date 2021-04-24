@@ -28,8 +28,12 @@ export default {
 
     const title = 'Scalability'
     const description = `
-      Scalability of a DLT network is largely determined by it's structure and the consensus mechanism used by the core protocol. 
-      The scalability of a DLT network can be increased with the inclusion of scaling technologies.
+      Scalability refers to a DLT plaforms ability to support a high number of transactions per second (TPS),
+      and is largely determined by the structure of a DLT network and the consensus mechanism used by the protocol. 
+      Scalability is also tied to the level of decentralization, a relationship that is often 
+      referred to as the Scalability Trilemma, according to which 
+      increasing scalability of a DLT network tends to lower decentralisation and 
+      network security. Scalability can also be increased with the inclusion of various technologies.
     `
 
     const offchainStorage = {

@@ -28,7 +28,7 @@ export default {
     const title = 'Interoperability'
     const description = `
       DLT interoperability allows DLT networks with different protocols to interact and exchange data with each other, 
-      enabling to connect different ecosystems and industry specific networks into greater value chains.
+      enabling to connect different general purpose and industry specific networks into greater value chains.
     `
 
     const steps = {
