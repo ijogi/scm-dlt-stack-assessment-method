@@ -47,8 +47,6 @@
             * Criteria are an approximation of the possible requirements that can influence a choice.
             Some characteristics such as high transaction throughput and data privacy can be achieved either by core features
             of a DLT platform or by extending a platform's capabilities with additional technologies.
-            On-chain refers to something taking place on the DLT network while off-chain refers to something taking place outside
-            the DLT network.
           </small>
         </p>
       </div>

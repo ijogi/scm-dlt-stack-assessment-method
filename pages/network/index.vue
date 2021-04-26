@@ -33,8 +33,11 @@ export default {
 
     const steps = {
       step0: {
-        title: 'Does the use case require control over governance of a DLT network?',
-        info: 'Governance determines who can host nodes, access or make changes to a DLT network and manage network operations.',
+        title: 'Does the use case require control over the governance of a DLT network?',
+        info: `
+          Control over governance fits use cases where stakeholders are determined based on the purpose of the network. 
+          Governance determines who can host nodes, access or make changes to a DLT network and manage network operations.
+        `,
         inclusionCriteria: ['Control over network governance', 'Restricted access', 'High throughput', 'Data privacy'],
         exclusionCriteria: ['Control over network governance is not required'],
         yes: [
@@ -44,7 +47,13 @@ export default {
       },
       step1: {
         title: 'Does the use case require data transparency or open governance of the network?',
-        info: 'Transparency provides SCM process visibility that can be used to verify data and to provide data provenance. Open governance can protect against concentration of influence over the operations or management of a DLT network.',
+        info: `
+          Public blockchain networks are openly accessible, meaning that every transaction is visible to anyone on the network. 
+          This makes verifying data easy while providing confidentiality requires additional technologies that are not typically part of the core platform. 
+          Public networks are also governed by open communities that collectively decide what’s best for a network. 
+          This can protect against concentration of influence while also making the underlying network susceptible 
+          to changes that may affect the operations of a SCM Dapp.
+        `,
         inclusionCriteria: ['Data transparency', 'Open governance', 'Decentralization'],
         exclusionCriteria: ['Data transparency is not required', 'Open governance is not required'],
         yes: [
@@ -54,13 +63,15 @@ export default {
       },
       step2: {
         title: 'Does the use case require a highly customizable or a high performance DLT network?',
-        info: 'Customization can be required to alter the behaviour of the core protocol in order to change ledger architecture or the consensus mechanism.',
-        inclusionCriteria: ['Modifiable core protocol', 'High throughput'],
-        exclusionCriteria: ['Protocol modifications are not required', 'Average throughput'],
+        info: `
+          Customization can be required to alter the behaviour of the core protocol in order to change ledger architecture or the consensus mechanism.
+          This can provide benefits for improving transaction performance or to make DLT compatible with complex systems.
+        `,
+        inclusionCriteria: ['Modifiable core protocol', 'High performance', 'DLT implemented in a technically complex environment'],
+        exclusionCriteria: ['Protocol modifications are not neccessary', 'Average throughput'],
         yes: [
           Features.getPrivateNetwork(VALUE.SHOULD_HAVE),
           Features.getPublicNetwork(VALUE.COULD_HAVE),
-          Features.getProtocolLayer(VALUE.MUST_HAVE),
           Qualities.getTransactionSpeed(VALUE.HIGH),
         ],
         no: [

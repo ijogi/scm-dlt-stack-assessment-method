@@ -17,8 +17,6 @@ export const state = () => ({
       Features.getSmartContracts(VALUE.MUST_HAVE),
       Features.getTuringComplete(VALUE.MUST_HAVE),
       Features.getEnterpriseIntegr(VALUE.MUST_HAVE),
-      Features.getNetworkLayer(VALUE.MUST_HAVE),
-      Features.getAppLayer(VALUE.MUST_HAVE),
       Qualities.getTechMaturity(VALUE.HIGH),
     ],
   },

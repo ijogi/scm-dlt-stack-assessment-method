@@ -38,9 +38,13 @@ export default {
     const steps = {
       step0: {
         title: 'Does the use case require storing unhashed data on a distributed ledger?',
-        info: 'Storing hashes instead of raw data enables to verify the integrity off-chain data, while also limiting utility for other use cases.',
-        inclusionCriteria: ['Ledger used as a database', 'On-chain business logic'],
-        exclusionCriteria: ['Used for off-chain data verification'],
+        info: `
+          Hashing is a cryptographic process by which arbitrary data can be turned into a fixed length incomprehensible string.
+          Storing hashes of data instead of the data itself enables to verify the integrity of data stored outside a distributed ledger, while also limiting its utility for other use cases. 
+          Storing raw data enables to use a distributed ledger as an immutable database that only allows to append new entries while disabling modifications to existing data.
+        `,
+        inclusionCriteria: ['Ledger used as a database'],
+        exclusionCriteria: ['Used only for off-chain data verification'],
         yes: 'step1',
         no: [
           Features.getPermissioned(VALUE.COULD_HAVE),
@@ -49,7 +53,10 @@ export default {
       },
       step1: {
         title: 'Does the use case require access control based on established identities?',
-        info: 'Identities can be used to grant different levels of access and to comply with regulations such as Know Your Client (KYC) requirements.',
+        info: `
+          Identities can be used to grant different levels of access for viewing records or to Dapp functionalities. 
+          Identity based access can also help to make SCM Dapps compliant with regulations such as Know Your Client (KYC) requirements.
+        `,
         inclusionCriteria: ['Identity based access', 'Data privacy'],
         exclusionCriteria: ['Identity based access is not required', 'Open access'],
         yes: [
@@ -71,9 +78,9 @@ export default {
       },
       step3: {
         title: 'Does the use case require data to be verifiable by anyone on the network?',
-        info: 'Use cases that require keeping data contents confidential while making verification available to all network participants, can utilize various privacy technologies to do so.',
-        inclusionCriteria: ['Data is verifiable across the network'],
-        exclusionCriteria: ['Data is available only to certain parties'],
+        info: 'Use cases that require keeping data contents confidential while making its existence or integrity verifiable, can utilize various privacy technologies to do so.',
+        inclusionCriteria: ['Existence of data or its integrity needs to be verifiable across the network'],
+        exclusionCriteria: ['Data contents are available only to certain parties'],
         yes: [
           Features.getPermissionless(VALUE.MUST_HAVE),
           Features.getPrivacyTech(VALUE.MUST_HAVE),
